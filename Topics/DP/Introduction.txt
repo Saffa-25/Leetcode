@@ -1,0 +1,26 @@
+Dynamic Programming
+
+Dynamic programming (DP) is an algorithmic technique used to solve complex problems by breaking them down into simpler subproblems, solving each subproblem just once, and storing their solutions to avoid repetitive calculations. It is primarily used as an optimization over plain recursion, transforming exponential time complexities (\(O(2^n)\)) into efficient polynomial ones (O(n) or O(n²)). 
+
+
+
+The Two Core Properties of a DP Problem
+
+A problem can only be solved using dynamic programming if it possesses two distinct characteristics:
+1. Overlapping Subproblems: The problem can be broken into smaller pieces, and those same pieces are calculated repeatedly. For instance, calculating the 5th Fibonacci number requires computing the 3rd Fibonacci number multiple times. DP saves this value so it only needs to be computed once.
+2. Optimal Substructure: The optimal solution to the overall, larger problem can be constructed directly from the optimal solutions of its subproblems.
+
+
+
+The Two Approaches to Implement DP
+
+1. Tabulation - bottom-up DP
+2. Memoization - top-down DP
+
+
+
+Steps to solving the DP problems
+
+1. Memoization , TC and SC
+2. Tabulation , TC and SC
+3. Memory optimal solution
