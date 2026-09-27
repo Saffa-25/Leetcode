@@ -1,0 +1,78 @@
+A frog is crossing a river. The river is divided into some number of units, and at each unit, there may or may not exist a stone. The frog can jump on a stone, but it must not jump into the water.
+
+Given a list of stones positions (in units) in sorted ascending order, determine if the frog can cross the river by landing on the last stone. Initially, the frog is on the first stone and assumes the first jump must be 1 unit.
+
+If the frog's last jump was k units, its next jump must be either k - 1, k, or k + 1 units. The frog can only jump in the forward direction.
+
+Example 1:
+
+Input: stones = [0,1,3,5,6,8,12,17]
+Output: true
+Explanation: The frog can jump to the last stone by jumping 1 unit to the 2nd stone, then 2 units to the 3rd stone, then 2 units to the 4th stone, then 3 units to the 6th stone, 4 units to the 7th stone, and 5 units to the 8th stone.
+Example 2:
+
+Input: stones = [0,1,2,3,4,8,9,11]
+Output: false
+Explanation: There is no way to jump to the last stone as the gap between the 5th and 6th stone is too large.
+
+Constraints:
+
+2 <= stones.length <= 2000
+0 <= stones[i] <= 231 - 1
+stones[0] == 0
+stones is sorted in a strictly increasing order.
+
+
+Solution:
+class Solution:
+    def canCross(self, stones: list[int]) -> bool:
+        ###Todo: solve using tabulation adn memory optimization next time
+        stone_set = set(stones)
+        memo = {}
+
+        def dfs(pos, jump):
+            if pos == stones[-1]:
+                return True
+
+            if (pos, jump) in memo:
+                return memo[(pos, jump)]
+
+            for nxt_jump in (jump - 1, jump, jump + 1):
+                if nxt_jump <= 0:
+                    continue
+
+                nxt = pos + nxt_jump
+
+                if nxt in stone_set and dfs(nxt, nxt_jump):
+                    memo[(pos, jump)] = True
+                    return True
+
+            memo[(pos, jump)] = False
+            return False
+
+        return dfs(0, 0)
+
+        # if  1 not in stones:
+        #     return False
+
+        # memo={}
+
+        # def dfs(a, b):
+        #     if a==0:
+        #         return False
+
+        #     if b==stones[-1]:
+        #         return True
+
+        #     if (a, b) in memo:
+        #         return memo[(a,b)]
+
+        #     x= False if not b+a-1 in stones else dfs(a-1, b+a-1)
+        #     y= False if not b+a in stones else dfs(a, b+a)
+        #     z= False if not b+a+1 in stones else dfs(a+1, b+a+1)
+
+        #     memo[(a,b)]=x or y or z
+        #     return x or y or z
+
+        # return dfs(1,1)
+
