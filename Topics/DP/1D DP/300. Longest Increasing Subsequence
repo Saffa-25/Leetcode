@@ -1,0 +1,41 @@
+class Solution:
+    def lengthOfLIS(self, nums: list[int]) -> int:
+        ##nlogn complexity
+
+        subseq=[]
+
+        for num in nums:
+            left, right =0, len(subseq)
+
+            while(left<right):
+                mid=(left+right)//2
+
+                if subseq[mid]<num:
+                    left=mid+1
+                else:
+                    right=mid
+
+            if left==len(subseq):
+                subseq.append(num)
+            else:
+                subseq[left]=num
+
+
+        return len(subseq)
+
+        ##n^2 complexity
+        # count=[1]*(len(nums))
+        # globalmax=1
+
+        # for i in range(len(nums)-2, -1, -1):
+        #     localmax=1
+        #     for j in range(i+1, len(nums)):
+        #         if nums[j]>nums[i]:
+        #             localmax=max(localmax, count[j]+count[i])
+            
+        #     count[i]=localmax
+            
+        #     globalmax=max(globalmax, localmax)
+
+        # return globalmax
+            
